@@ -1,0 +1,13 @@
+{
+    "name": "marunet/phpstan",
+    "type": "project",
+    "require-dev": {
+        "phpstan/phpstan": "^1.8"
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "autoloader-suffix": "project"
+    }
+}
