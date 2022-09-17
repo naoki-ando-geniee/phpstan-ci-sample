@@ -1,0 +1,40 @@
+name: PHPStan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Cache Composer packages
+      id: phpstan-composer-cache
+      uses: actions/cache@v3
+      with:
+        path: dev/phpstan/vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Setup PHP with PECL extension
+      uses: shivammathur/setup-php@2.21.2
+      with:
+        php-version: '7.4'
+        extensions: pdo_mysql, bcmath, mbstring, pdo, intl
+
+    - name: Install dependencies
+      working-directory: dev/phpstan
+      run: composer install --prefer-dist --no-progress
+      
+    - name: Analyze PHP source
+      run: ./dev/phpstan/vendor/bin/phpstan analyze --memory-limit 1G
