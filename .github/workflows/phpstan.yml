@@ -1,0 +1,23 @@
+name: PHPStan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: PHPStan
+      uses: OskarStark/phpstan-ga@1.6.0
+      with:
+        args: analyze --memory-limit 1G
