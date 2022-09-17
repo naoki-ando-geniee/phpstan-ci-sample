@@ -29,3 +29,7 @@ jobs:
     - name: Install dependencies
       working-directory: dev/phpstan
       run: composer install --prefer-dist --no-progress
+      
+    - name: PHPStan
+      uses: franzliedke/gh-action-php@0.2.0
+      runs: php7.4 dev/phpstan/vendor/bin/phpstan analyze --memory-limit 1G
