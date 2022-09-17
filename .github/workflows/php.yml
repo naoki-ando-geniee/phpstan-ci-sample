@@ -26,10 +26,15 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-php-
 
+    - name: Setup PHP with PECL extension
+      uses: shivammathur/setup-php@2.21.2
+      with:
+        php-version: '7.4'
+        extensions: pdo_mysql, bcmath, mbstring, pdo, intl
+
     - name: Install dependencies
       working-directory: dev/phpstan
       run: composer install --prefer-dist --no-progress
       
-    - name: PHPStan
-      uses: franzliedke/gh-action-php@0.2.0
-      runs: php7.4 dev/phpstan/vendor/bin/phpstan analyze --memory-limit 1G
+    - name: Analyze PHP source
+      run: ./dev/phpstan/vendor/bin/phpstan analyze --memory-limit 1G
