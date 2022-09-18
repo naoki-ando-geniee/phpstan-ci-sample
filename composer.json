@@ -1,0 +1,20 @@
+{
+    "name": "naoki-ando/phpstan-ci-sample",
+    "type": "project",
+    "require-dev": {
+        "deployer/deployer": "^7.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "NaokiAndo\\PhpstanCiSample\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "naoki-ando",
+            "email": "naoki.ando@geniee.co.jp"
+        }
+    ],
+    "require": {}
+}
