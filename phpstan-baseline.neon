@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Access to an undefined property OldClass\\:\\:\\$prop\\.$#"
+			count: 2
+			path: src/old_code.php
