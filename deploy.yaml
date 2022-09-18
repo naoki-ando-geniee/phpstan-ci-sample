@@ -1,0 +1,35 @@
+import:
+  - recipe/composer.php
+
+config:
+  repository: 'git@github.com:naoki-ando-geniee/phpstan-ci-sample.git'
+  keep_releases: 3
+  shared_dirs:
+    - src/config
+  ssh_multiplexing: true
+  ssh_control_path: ~/.ssh/%r@%h:%p
+
+hosts:
+  stg-01:
+    local: true
+    deploy_path: '/tmp/phpstan-ci-sample/staging/stg-01/phpstan-ci-sample'
+    labels:
+      env: staging
+  stg-02:
+    local: true
+    deploy_path: '/tmp/phpstan-ci-sample/staging/stg-02/phpstan-ci-sample'
+    labels:
+      env: staging
+  pro-01:
+    hostname: localhost
+    deploy_path: '/tmp/phpstan-ci-sample/production/pro-01/phpstan-ci-sample'
+    labels:
+      env: production
+  pro-02:
+    hostname: localhost
+    deploy_path: '/tmp/phpstan-ci-sample/production/pro-02/phpstan-ci-sample'
+    labels:
+      env: production
+
+after:
+  deploy:failed: deploy:unlock
