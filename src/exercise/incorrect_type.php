@@ -4,6 +4,9 @@ namespace IncorrectType;
 use Demo\DB;
 
 class SampleClass {
+    /**
+     * @throws \Exception
+     */
     public function getUserId(string $userName): int
     {
         /** @var array<string>|null $row */
@@ -12,6 +15,9 @@ class SampleClass {
             ->where('name', $userName)
             ->execute()
             ->current();
-        return $row['id'];
+        if ($row === null) {
+            throw new \Exception("User {$userName} not found");
+        }
+        return (int) $row['id'];
     }
 }
